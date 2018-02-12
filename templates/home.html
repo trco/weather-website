@@ -2,9 +2,35 @@
 
 {% block content %}
 
-<div class="jumbotron">
-  <h1>Ninja Tech Forum</h1>
-  <p>Welcome to Ninja Tech Forum</p>
+<h1>Weater Website</h1>
+<div class="text-center">
+  {% for item in json_data["list"] %}
+  {% if item["name"] in pinned_cities %}
+  <div class="list-group pinned">
+    <h4 class="list-group-item-heading">{{ item["name"] }}</h4>
+    <p class="list-group-item-text">Temperature: {{ item["main"]["temp"]|round|int }} °C</p>
+    <p class="list-group-item-text">Weather: {{ item["weather"][0]["main"]}}</p>
+    <form method="post" action="/pin-unpin">
+      <input type="hidden" name="city" value="{{ item["name"] }}" />
+      <button class="btn btn-success" type="submit" name="action" value="unpin">Unpin</button>
+    </form>
+  </div>
+  {% endif %}
+  {% endfor %}
+
+  {% for item in json_data["list"] %}
+  {% if item["name"] not in pinned_cities %}
+  <div class="list-group unpinned">
+    <h4 class="list-group-item-heading">{{ item["name"] }}</h4>
+    <p class="list-group-item-text">Temperature: {{ item["main"]["temp"]|round|int }} °C</p>
+    <p class="list-group-item-text">Weather: {{ item["weather"][0]["main"]}}</p>
+    <form method="post" action="/pin-unpin">
+      <input type="hidden" name="city" value="{{ item["name"] }}" />
+      <button class="btn btn-primary" type="submit" name="action" value="pin">Pin</button>
+    </form>
+  </div>
+  {% endif %}
+  {% endfor %}
 </div>
 
 {% endblock content %}

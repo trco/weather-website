@@ -1,3 +1,25 @@
-body {
-    background-color: red;
+.list-group {
+  width: 200px;
+  padding: 10px;
+
+}
+
+.pinned {
+  color: green;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: green;
+}
+
+.unpinned {
+  color: #337ab7;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: #337ab7;
+}
+
+.list-group-item-text {
+  margin-bottom: 5px;
 }
